@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: application
+metadata:
+  name: devtest.math-sample
+  commType: http
+spec:
+  services:
+    - serviceName: math-sample
+      components:
+        - componentName: math-sample
+          imageType: docker
+          imageName: math-sample
+          httpPort: 8080
+          interfaces:
+            - interfaceName: context1
+              interfaceType: http
+              upstreamPath: /service
+              visiblity: external
+              accessList:
+                - app@client
+          resourceProfiles:
+            - resourceProfileName: default
+              memory: 1024
+              cpu: 1
+          defaultResourceProfile: default
